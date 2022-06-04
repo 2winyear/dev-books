@@ -1,7 +1,43 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity, Alert} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import AsyncStorage from '@react-native-community/async-storage';
 
-function TodoItem({id, text, done, onToggle}) {
+function TodoItem({id, text, done, onToggle, onRemove}) {
+    const save = async () => {
+        try {
+            await AsyncStorage.setItem('key', 'value');
+        } catch (e) {
+            // 오류 예외 처리
+        }
+    }
+    const load = async () => {
+        try{
+            const value = await AsyncStorage.getItem('key');
+        } catch(e) {
+            
+        }
+    }
+    const remove = () => {
+        Alert.alert(
+            '삭제',
+            '정말로 삭제하시겠어요?',
+            [
+                {text: '취소', onPress: () => {}, style:'cancel'},
+                {
+                    text: '삭제',
+                    onPress: () => {
+                    onRemove(id);
+                },
+                style: 'destructive',
+            },
+            ],
+            {
+                cancelable: true,
+                onDismiss: () => {},
+            },
+        );
+    };
     return (
         <View style = {styles.item} >
             <TouchableOpacity onPress={() => onToggle(id)}>
@@ -12,6 +48,7 @@ function TodoItem({id, text, done, onToggle}) {
                 </View>
             </TouchableOpacity>
             <Text style={[styles.text, done && styles.lineThrough]}>{text}</Text>
+            {done ? (<TouchableOpacity onPress={remove}><Icon name="delete" size={32} color="red"/></TouchableOpacity>) : (<View style={styles.removePlaceholder} /> )}
         </View>
     );
 }
@@ -44,6 +81,10 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 16,
         color: '#212121'
+    },
+    removePlaceholder: {
+        width: 32,
+        height: 32,
     },
 });
 

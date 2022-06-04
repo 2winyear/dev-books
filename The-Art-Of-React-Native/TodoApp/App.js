@@ -16,6 +16,11 @@ function App() {
     {id:3, text: '투두리스트 만들어보기', done: false},
   ]);
 
+  const onRemove = id => {
+    const nextTodos = todos.filter(todo => todo.id !== id);
+    setTodos(nextTodos);
+  };
+
   const onInsert = text => {
     // 새로 등록할 항목의 id를 구합니다.
     // 등록된 항목 중에서 가장 큰 id를 구하고, 그 값에 1을 더합니다.
@@ -45,7 +50,7 @@ function App() {
           behavior={Platform.select({ios:'padding', android: undefined})}
           style={styles.avoid}>
           <DateHead date={today} />
-          {todos.length === 0 ? <Empty/> : <TodoList todos={todos} onToggle={onToggle}/>}
+          {todos.length === 0 ? <Empty/> : <TodoList todos={todos} onToggle={onToggle} onRemove={onRemove}/>}
           <AddTodo onInsert={onInsert}/>
         </KeyboardAvoidingView> 
       </SafeAreaView>

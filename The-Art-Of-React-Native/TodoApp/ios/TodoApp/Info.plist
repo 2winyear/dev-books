@@ -50,6 +50,9 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<array>
+		<string>MaterialIcons.ttf</string>
+	</array>
 	<false/>
 </dict>
 </plist>
