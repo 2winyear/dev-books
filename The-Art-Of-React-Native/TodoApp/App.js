@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Platform, StyleSheet, TouchableOpacity} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 import KeyboardAvoidingView from 'react-native/Libraries/Components/Keyboard/KeyboardAvoidingView';
+
 import AddTodo from './components/AddTodo';
 import DateHead from './components/DateHead';
 import Empty from './components/Empty';
@@ -15,6 +16,7 @@ function App() {
     {id:2, text: '리액트 네이티브 기초 공부', done: true},
     {id:3, text: '투두리스트 만들어보기', done: false},
   ]);
+
 
   const onRemove = id => {
     const nextTodos = todos.filter(todo => todo.id !== id);
