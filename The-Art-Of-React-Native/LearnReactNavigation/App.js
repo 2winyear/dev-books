@@ -6,6 +6,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 
 const Drawer = createDrawerNavigator();
 
+
 function HomeScreen({navigation}) {
   return (
     <View>
@@ -35,6 +36,9 @@ function App() {
         initialRouteName="Home"
         drawerPosition="left"
         backBehavior="history"
+        screenOptions={{
+          headerShown: false,
+      }}
         drawerContent={({navigation}) => (
           <SafeAreaView>
             <Text>A Custom Drawer</Text>
